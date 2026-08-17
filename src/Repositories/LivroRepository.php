@@ -11,7 +11,15 @@ require_once __DIR__ . '/../Entities/Livro.php';
      }
 
 
-
+    public function salvar(Livro $livro): bool {
+       if ($livro->getId() === null) {
+           return $this->criar($livro);
+        } else {
+            return $this->atualizar($livro);
+        }
+    
+        }
+ 
 
 
 
