@@ -19,7 +19,17 @@ require_once __DIR__ . '/../Entities/Livro.php';
         }
     
         }
- 
+
+     private function criar(Livro $livro): bool {
+         $sql = "INSERT INTO livros (titulo, isbn, categoria_id, status, imagem) VALUES (:titulo, :isbn, :categoria_id, :status, :imagem)";
+         $stmt = $this->db->prepare($sql);
+         $sucesso = $stmt->execute([
+             ':titulo' => $livro->getTitulo(),
+             ':isbn' => $livro->getIsbn(),
+             ':categoria_id' => $livro->getCategoriaId(),
+             ':status' => $livro->getStatus(),
+             ':imagem' => $livro->getImagem()
+         ]);
 
 
 
