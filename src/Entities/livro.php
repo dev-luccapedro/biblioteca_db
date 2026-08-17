@@ -27,6 +27,9 @@ class Livro {
         $this->status = 'emprestado';
     }
 
+    public function devolver(): void {
+        $this->status = 'disponivel';
+    }
 
 
 
