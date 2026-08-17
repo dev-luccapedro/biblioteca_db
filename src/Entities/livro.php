@@ -16,7 +16,16 @@ class Livro {
         $this->setStatus($status);
         $this->imagem = $imagem;
     }
-
+     
+    public function marcarComoEmprestado(): void {
+        if ($this->status === 'emprestado') {
+            throw new Exception("O livro '{$this->titulo}' já se encontra emprestado.");
+        }
+        if ($this->status === 'manutencao') {
+            throw new Exception("O livro está em manutenção e não pode ser emprestado.");
+        }
+        $this->status = 'emprestado';
+    }
 
 
 
