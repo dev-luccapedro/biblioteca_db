@@ -58,7 +58,20 @@ require_once __DIR__ . '/../Entities/Livro.php';
      }
 
 
+     private function sincronizarAutores(int $livroId, array $autoresIds): void {
+         $sqlDelete = "DELETE FROM livro_autor WHERE livro_id = :livro_id";
+         $stmtDelete = $this->db->prepare($sqlDelete);
+         $stmtDelete->execute([':livro_id' => $livroId]);
+         if (!empty($autoresIds)) {
+             $sqlInsert = "INSERT INTO livro_autor (livro_id, autor_id) VALUES (:livro_id, :autor_id)";
+             $stmtInsert = $this->db->prepare($sqlInsert);
+             foreach ($autoresIds as $autorId) {
+                 $stmtInsert->execute([':livro_id' => $livroId, ':autor_id' => $autorId]);
+             }
+         }
+     }
 
+     
 
 
 
