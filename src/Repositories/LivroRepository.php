@@ -31,7 +31,13 @@ require_once __DIR__ . '/../Entities/Livro.php';
              ':imagem' => $livro->getImagem()
          ]);
 
-
+         if ($sucesso) {
+             $livroId = (int)$this->db->lastInsertId();
+             $livro->setId($livroId);
+             $this->sincronizarAutores($livroId, $livro->getAutoresIds());
+         }
+         return $sucesso;
+     }
 
 
 
