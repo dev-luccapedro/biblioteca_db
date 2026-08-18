@@ -71,7 +71,47 @@ require_once __DIR__ . '/../Entities/Livro.php';
          }
      }
 
-     
+
+     public function buscarPorId(int $id): ?array {
+         $sql = "SELECT l.*, c.nome as categoria_nome FROM livros l 
+                 JOIN categorias c ON l.categoria_id = c.id 
+                 WHERE l.id = :id";
+         $stmt = $this->db->prepare($sql);
+         $stmt->execute([':id' => $id]);
+         $livro = $stmt->fetch();
+ 
+         if (!$livro) return null;
+         $sqlAutores = "SELECT a.id, a.nome FROM autores a 
+                        JOIN livro_autor la ON a.id = la.autor_id 
+                        WHERE la.livro_id = :livro_id";
+         $stmtAutores = $this->db->prepare($sqlAutores);
+         $stmtAutores->execute([':livro_id' => $id]);
+         $livro['autores'] = $stmtAutores->fetchAll();
+ 
+         return $livro;
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
