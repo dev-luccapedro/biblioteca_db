@@ -119,7 +119,12 @@ require_once __DIR__ . '/../Entities/Livro.php';
 
 
 
-
+     public function excluir(int $id): bool {
+         $sql = "DELETE FROM livros WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+         return $stmt->execute([':id' => $id]);
+     }
+ 
 
 
 
