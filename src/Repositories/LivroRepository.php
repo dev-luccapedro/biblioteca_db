@@ -40,7 +40,22 @@ require_once __DIR__ . '/../Entities/Livro.php';
      }
 
 
-
+     private function atualizar(Livro $livro): bool {
+         $sql = "UPDATE livros SET titulo = :titulo, isbn = :isbn, categoria_id = :categoria_id, status = :status, imagem = :imagem WHERE id = :id";
+         $stmt = $this->db->prepare($sql);
+         $sucesso = $stmt->execute([
+             ':id' => $livro->getId(),
+             ':titulo' => $livro->getTitulo(),
+             ':isbn' => $livro->getIsbn(),
+             ':categoria_id' => $livro->getCategoriaId(),
+             ':status' => $livro->getStatus(),
+             ':imagem' => $livro->getImagem()
+         ]);
+         if ($sucesso) {
+             $this->sincronizarAutores($livro->getId(), $livro->getAutoresIds());
+         }
+         return $sucesso;
+     }
 
 
 
