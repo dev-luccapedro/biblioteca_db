@@ -93,8 +93,28 @@ require_once __DIR__ . '/../Entities/Livro.php';
 
 
 
-
-
+     public function listarTodos(string $busca = '', string $categoriaId = ''): array {
+         $sql = "SELECT l.*, c.nome as categoria_nome, GROUP_CONCAT(a.nome SEPARATOR ', ') as autores 
+                 FROM livros l
+                 JOIN categorias c ON l.categoria_id = c.id
+                 LEFT JOIN livro_autor la ON l.id = la.livro_id
+                 LEFT JOIN autores a ON la.autor_id = a.id
+                 WHERE 1=1";
+         $params = [];
+         if (!empty($busca)) {
+             $sql .= " AND (l.titulo LIKE :busca OR l.isbn LIKE :busca)";
+             $params[':busca'] = "%{$busca}%";
+         }
+ 
+         if (!empty($categoriaId)) {
+             $sql .= " AND l.categoria_id = :categoria_id";
+             $params[':categoria_id'] = $categoriaId;
+         }
+         $sql .= " GROUP BY l.id ORDER BY l.id DESC";
+         $stmt = $this->db->prepare($sql);
+         $stmt->execute($params);
+         return $stmt->fetchAll();
+     }
 
 
 
