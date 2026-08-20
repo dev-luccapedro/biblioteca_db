@@ -12,3 +12,8 @@ require_once __DIR__ . '/config/database.php';
  $livros = $repo->listarTodos($busca, $categoriaId);
  $categorias = $db->query("SELECT * FROM categorias")->fetchAll();
  ?>
+
+ <h2>Gestão de Livros</h2>
+ <?php if (isset($_SESSION['mensagem'])): ?>
+     <div class="alert-success"><?= $_SESSION['mensagem']; unset($_SESSION['mensagem']); ?></div>
+ <?php endif; ?>
