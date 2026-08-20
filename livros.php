@@ -17,3 +17,18 @@ require_once __DIR__ . '/config/database.php';
  <?php if (isset($_SESSION['mensagem'])): ?>
      <div class="alert-success"><?= $_SESSION['mensagem']; unset($_SESSION['mensagem']); ?></div>
  <?php endif; ?>
+
+ <a href="livro_form.php" class="btn">+ Novo Livro</a>
+ 
+ <form method="GET" style="margin-top: 15px; display: flex; gap: 10px;">
+     <input type="text" name="busca" placeholder="Buscar por Título ou ISBN..." value="<?= htmlspecialchars($busca) ?>">
+     <select name="categoria_id">
+         <option value="">Todas as Categorias</option>
+         <?php foreach ($categorias as $cat): ?>
+             <option value="<?= $cat['id'] ?>" <?= $categoriaId == $cat['id'] ? 'selected' : '' ?>>
+                 <?= htmlspecialchars($cat['nome']) ?>
+             </option>
+         <?php endforeach; ?>
+     </select>
+     <button type="submit" class="btn btn-info">Filtrar</button>
+ </form>
