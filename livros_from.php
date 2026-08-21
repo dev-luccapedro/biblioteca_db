@@ -8,4 +8,14 @@
  
  $categorias = $db->query("SELECT * FROM categorias")->fetchAll();
  $autores = $db->query("SELECT * FROM autores")->fetchAll();
+ $id = $_GET['id'] ?? null;
+ $livroData = null;
+ $autoresSelecionados = [];
+ $erro = '';
  
+ if ($id) {
+     $livroData = $livroRepo->buscarPorId((int)$id);
+     if ($livroData) {
+         $autoresSelecionados = array_column($livroData['autores'], 'id');
+     }
+     }
