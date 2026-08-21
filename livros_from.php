@@ -19,3 +19,10 @@
          $autoresSelecionados = array_column($livroData['autores'], 'id');
      }
      }
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+     $titulo = trim($_POST['titulo'] ?? '');
+     $isbn = trim($_POST['isbn'] ?? '');
+     $categoriaId = (int)($_POST['categoria_id'] ?? 0);
+          $status = $_POST['status'] ?? 'disponivel';
+     $autoresPost = $_POST['autores'] ?? [];
+     $nomeImagem = $livroData['imagem'] ?? null;
