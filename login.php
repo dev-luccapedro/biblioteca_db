@@ -9,7 +9,7 @@
      $repo = new UsuarioRepository();
      $usuario = $repo->buscarPorEmail($email);
 
-     if ($usuario && password_verify($senha, $usuario['senha'])) {
+     if ($usuario && $senha === $usuario['senha']) {
          session_start();
          $_SESSION['usuario'] = [
              'id' => $usuario['id'],

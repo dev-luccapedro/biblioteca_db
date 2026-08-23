@@ -18,7 +18,7 @@ require_once __DIR__ . '/config/database.php';
      <div class="alert-success"><?= $_SESSION['mensagem']; unset($_SESSION['mensagem']); ?></div>
  <?php endif; ?>
 
- <a href="livro_form.php" class="btn">+ Novo Livro</a>
+ <a href="livros_form.php" class="btn">+ Novo Livro</a>
  
  <form method="GET" style="margin-top: 15px; display: flex; gap: 10px;">
      <input type="text" name="busca" placeholder="Buscar por Título ou ISBN..." value="<?= htmlspecialchars($busca) ?>">
@@ -61,11 +61,11 @@ require_once __DIR__ . '/config/database.php';
              <td><strong><?= strtoupper($l['status']) ?></strong></td>
              <td>
                  <a href="livro_detalhe.php?id=<?= $l['id'] ?>" class="btn btn-info">Ver</a>
-                 <a href="livro_form.php?id=<?= $l['id'] ?>" class="btn">Editar</a>
+                 <a href="livros_form.php?id=<?= $l['id'] ?>" class="btn">Editar</a>
                  <a href="livro_excluir.php?id=<?= $l['id'] ?>" class="btn btn-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
              </td>
          </tr>
          <?php endforeach; ?>
      </tbody>
  </table>
-<?php require_once __DIR__ . '/include/footer.php'; ?>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
