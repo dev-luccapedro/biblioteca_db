@@ -6,3 +6,19 @@
      header("Location: login.php");
      exit;
  }
+  $id = $_GET['id'] ?? null;
+ if ($id) {
+     $repo = new LivroRepository();
+     
+     $livro = $repo->buscarPorId((int)$id);
+     if ($livro && $livro['imagem'] && file_exists(__DIR__ . '/uploads/' . $livro['imagem'])) {
+         unlink(__DIR__ . '/uploads/' . $livro['imagem']);
+     }
+
+
+
+
+
+
+
+ }
