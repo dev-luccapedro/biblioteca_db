@@ -5,7 +5,7 @@
      private PDO $db;
  
      public function __construct() {
-         $this->db = Database::getConnection();
+         $this->db = database::getConnection();
      }
  
      public function buscarPorEmail(string $email): ?array {
