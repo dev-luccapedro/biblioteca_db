@@ -15,7 +15,10 @@
          unlink(__DIR__ . '/uploads/' . $livro['imagem']);
      }
 
-
+    $repo->excluir((int)$id);
+    $_SESSION['mensagem'] = "Livro excluído com sucesso!";
+     header("Location: livros.php");
+     exit;    
 
 
 
