@@ -1,3 +1,8 @@
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head> 
+ 
+ 
  <?php
  if (session_status() === PHP_SESSION_NONE) {
      session_start();
